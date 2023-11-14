@@ -1,5 +1,7 @@
 package com.codeclan.Relationships.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,8 @@ public class Department {
     private Long id;
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "department")
+    @JsonIgnoreProperties({"department"})
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private List<Employee> employees;
 
     public Department(String name) {
